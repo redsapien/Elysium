@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Elysium | Medicina Estética & Wellness</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Manrope:wght@200;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --bg-card: #0f0f0f;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --gold-lux: #D4AF37;
+            --red-sapien: #8a0303;
+            --glass: rgba(15, 15, 15, 0.9);
+            --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Manrope', sans-serif; 
+            background-color: var(--bg-deep); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+        #particles {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .dust {
+            position: absolute; width: 2px; height: 2px;
+            background: var(--gold-lux); border-radius: 50%;
+            opacity: 0; animation: floatUp 10s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        nav { 
+            position: fixed; top: 0; width: 100%; padding: 20px 5%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: var(--glass); backdrop-filter: blur(12px); 
+            z-index: 1000; border-bottom: var(--border-subtle);
+        }
+        
+        .brand { 
+            font-size: 1.4rem; font-weight: 700; color: var(--text-main); 
+            text-transform: uppercase; letter-spacing: 3px;
+        }
+        .brand span { color: var(--red-sapien); }
+
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--gold-lux);
+        }
+        
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to top, var(--bg-deep) 10%, transparent 80%),
+                        url('https://images.unsplash.com/photo-1579152276503-3463879f7292?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            filter: brightness(0.6);
+        }
+
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; max-width: 800px; padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--gold-lux);
+            text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 40px;
+        }
+
+        section { padding: 100px 5%; position: relative; z-index: 2; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { color: #fff; font-size: 2.2rem; margin-bottom: 10px; }
+        .section-header .line { width: 60px; height: 3px; background: var(--red-sapien); margin: 0 auto; }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; max-width: 1400px; margin: 0 auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: var(--border-subtle);
+            border-radius: 4px; overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--gold-lux); 
+        }
+
+        .card-img {
+            width: 100%; height: 280px; overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(30%); transition: 0.6s;
+        }
+        
+        .card:hover .card-img img { filter: grayscale(0%); transform: scale(1.05); }
+
+        .card-body { padding: 30px; }
+        .card-body h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
+        .card-body p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; min-height: 60px; }
+        
+        .price { color: var(--gold-lux); font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 20px; }
+
+        .btn-add {
+            width: 100%; padding: 15px; background: transparent;
+            border: 1px solid var(--text-muted); color: #fff;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem;
+            cursor: pointer; transition: var(--transition);
+        }
+        .btn-add:hover { background: #fff; color: var(--bg-deep); }
+
+        .fab-cart {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 70px; height: 70px; background: var(--red-sapien);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 30px rgba(138, 3, 3, 0.4); z-index: 2000;
+            cursor: pointer; border: 2px solid rgba(255,255,255,0.1);
+        }
+        .badge {
+            position: absolute; top: 0; right: 0; background: var(--gold-lux);
+            color: var(--bg-deep); width: 25px; height: 25px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 0.8rem; opacity: 0;
+        }
+        .badge.show { opacity: 1; }
+
+        .form-box {
+            max-width: 600px; margin: 0 auto;
+            background: var(--bg-card); padding: 40px;
+            border: 1px solid var(--gold-lux);
+        }
+
+        input, select {
+            width: 100%; background: #050505; border: 1px solid #333;
+            padding: 18px; color: white; margin-bottom: 20px;
+            font-family: inherit;
+        }
+        
+        .btn-submit {
+            background: var(--gold-lux); color: var(--bg-deep);
+            border: none; padding: 18px; width: 100%;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        #checkout-overlay {
+            position: fixed; inset: 0; background: var(--bg-deep);
+            z-index: 3000; display: none; padding: 80px 20px; overflow-y: auto;
+        }
+
+        #bio-loader {
+            position: fixed; inset: 0; background: #000; z-index: 5000;
+            display: none; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .scan-line {
+            width: 100%; height: 2px; background: var(--red-sapien);
+            position: absolute; top: 0; animation: scan 2s infinite linear;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        footer { padding: 60px 20px; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="particles"></div>
+
+    <nav>
+        <div class="brand">ELYSIUM <span>+</span></div>
+        <div style="color:white; cursor:pointer;" onclick="document.getElementById('services').scrollIntoView()"><i class="fa-solid fa-microscope"></i></div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>Bio-Regeneración<br>Celular</h1>
+            <p>Salud • Longevidad • Alta Estética</p>
+            <button class="btn-submit" style="width: auto; padding: 15px 40px; background: transparent; border: 1px solid var(--gold-lux); color: var(--gold-lux);" onclick="document.getElementById('services').scrollIntoView()">Ver Protocolos</button>
+        </div>
+    </div>
+
+    <div class="fab-cart" onclick="openCheckout()">
+        <i class="fa-regular fa-calendar-check" style="color:white; font-size:1.5rem;"></i>
+        <div class="badge" id="count-badge">0</div>
+    </div>
+
+    <section id="services">
+        <div class="section-header">
+            <h2>Protocolos de Salud Estética</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="services-grid">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop" alt="Skin Care High Tech">
+                </div>
+                <div class="card-body">
+                    <h3>Limpieza Clínica Profunda</h3>
+                    <p>Desintoxicación dérmica con tecnología ultrasónica y oxigenación celular activa.</p>
+                    <span class="price">$180.000 COP</span>
+                    <button class="btn-add" onclick="addService('Limpieza Clínica', 180000)">Agendar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop" alt="Medicine Esthetic">
+                </div>
+                <div class="card-body">
+                    <h3>Armonización Médica</h3>
+                    <p>Restauración de volúmenes perdidos y bio-estimulación con hidroxiapatita de calcio.</p>
+                    <span class="price">$1.500.000 COP</span>
+                    <button class="btn-add" onclick="addService('Armonización Médica', 1500000)">Agendar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=2069&auto=format&fit=crop" alt="Laser Treatment">
+                </div>
+                <div class="card-body">
+                    <h3>Láser Co2 Fraccionado</h3>
+                    <p>Renovación total de la textura de la piel, eliminación de cicatrices y rejuvenecimiento real.</p>
+                    <span class="price">$850.000 COP</span>
+                    <button class="btn-add" onclick="addService('Láser Co2', 850000)">Agendar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2020&auto=format&fit=crop" alt="Wellness Spa">
+                </div>
+                <div class="card-body">
+                    <h3>Sueroterapia Biológica</h3>
+                    <p>Cócteles intravenosos de vitaminas y oligoelementos para bienestar y vitalidad integral.</p>
+                    <span class="price">$320.000 COP</span>
+                    <button class="btn-add" onclick="addService('Sueroterapia', 320000)">Agendar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section" style="background: #080808;">
+        <div class="section-header">
+            <h2>Valoración Especializada</h2>
+            <p style="color: #666; margin-top: 10px;">INICIA TU TRANSFORMACIÓN CON EVIDENCIA CLÍNICA</p>
+        </div>
+        <div class="form-box">
+            <form onsubmit="handleQuickBooking(event)">
+                <input type="text" id="quickName" placeholder="Nombre del Paciente" required>
+                <input type="tel" id="quickPhone" placeholder="WhatsApp de Contacto" required>
+                <select id="quickType">
+                    <option value="Consulta Médica">Consulta Médica Estética</option>
+                    <option value="Plan Wellness">Plan de Bienestar Integral</option>
+                    <option value="Control">Seguimiento de Protocolo</option>
+                </select>
+                <button type="submit" class="btn-submit">Solicitar Cita</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="checkout-overlay">
+        <div style="position: absolute; top: 30px; right: 30px; font-size: 2rem; color: #888; cursor: pointer;" onclick="closeCheckout()">&times;</div>
+        <div class="form-box" style="margin-top: 50px;">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #fff;">Confirmar Selección</h2>
+            <div id="summary-content" style="background: #111; padding: 20px; border-radius: 4px; margin-bottom: 30px;"></div>
+            <form onsubmit="processOrder(event)">
+                <input type="text" id="finalName" placeholder="Nombre Completo" required>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <input type="date" id="finalDate" required>
+                    <input type="time" id="finalTime" required>
+                </div>
+                <button type="submit" class="btn-submit" style="background: var(--red-sapien); color: white;">Agendar Ahora</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="bio-loader">
+        <div class="scan-line"></div>
+        <h3 style="color: #fff; margin-top: 20px;">VALIDANDO PROTOCOLO CLÍNICO...</h3>
+    </div>
+
+    <footer>
+        <p>ELYSIUM HEALTH & AESTHETIC © 2026</p>
+        <p style="opacity: 0.5; margin-top: 5px;">Medicina Basada en la Excelencia</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        // Partículas decorativas
+        for(let i=0; i<25; i++) {
+            let d = document.createElement('div');
+            d.className = 'dust';
+            d.style.left = Math.random() * 100 + 'vw';
+            d.style.animationDuration = (Math.random() * 8 + 4) + 's';
+            document.getElementById('particles').appendChild(d);
+        }
+
+        function addService(name, price) {
+            cart.push({name, price});
+            const badge = document.getElementById('count-badge');
+            badge.innerText = cart.length;
+            badge.classList.add('show');
+            
+            const btn = event.target;
+            btn.innerHTML = "Añadido";
+            btn.style.borderColor = "var(--gold-lux)";
+            setTimeout(() => { btn.innerHTML = "Agendar"; }, 2000);
+        }
+
+        function openCheckout() {
+            if(cart.length === 0) return alert("Seleccione un protocolo médico.");
+            const summary = document.getElementById('summary-content');
+            let total = cart.reduce((acc, item) => acc + item.price, 0);
+            summary.innerHTML = cart.map(item => `<div style="display:flex; justify-content:space-between; margin-bottom:10px; color:#bbb"><span>${item.name}</span><span>$${item.price.toLocaleString()}</span></div>`).join('') + `<hr style="border:0; border-top:1px solid #333; margin:15px 0"><div style="text-align:right; color:var(--gold-lux); font-weight:bold">Total: $${total.toLocaleString()}</div>`;
+            document.getElementById('checkout-overlay').style.display = 'block';
+        }
+
+        function closeCheckout() { document.getElementById('checkout-overlay').style.display = 'none'; }
+
+        function showLoader(callback) {
+            document.getElementById('checkout-overlay').style.display = 'none';
+            document.getElementById('bio-loader').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('bio-loader').style.display = 'none';
+                callback();
+            }, 2000);
+        }
+
+        function handleQuickBooking(e) {
+            e.preventDefault();
+            showLoader(() => {
+                const name = document.getElementById('quickName').value;
+                const type = document.getElementById('quickType').value;
+                const msg = `🏥 *SOLICITUD DE VALORACIÓN ELYSIUM*\n\n👤 *Paciente:* ${name}\n🩺 *Servicio:* ${type}`;
+                window.open(`https://wa.me/573207376174?text=${encodeURIComponent(msg)}`);
+            });
+        }
+
+        function processOrder(e) {
+            e.preventDefault();
+            showLoader(() => {
+                const name = document.getElementById('finalName').value;
+                const date = document.getElementById('finalDate').value;
+                const time = document.getElementById('finalTime').value;
+                const items = cart.map(i => "• " + i.name).join("\n");
+                const msg = `💎 *RESERVA CLÍNICA VIP*\n\n👤 *Paciente:* ${name}\n📅 *Fecha:* ${date}\n⏰ *Hora:* ${time}\n\n📋 *Protocolos:*\n${items}`;
+                window.open(`https://wa.me/573207376174?text=${encodeURIComponent(msg)}`);
+                location.reload();
+            });
+        }
+    </script>
+</body>
+</html>

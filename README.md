@@ -1,2 +1,0 @@
-# elysium
-Repo de propuesta
